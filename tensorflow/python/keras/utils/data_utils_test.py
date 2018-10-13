@@ -162,7 +162,7 @@ class TestEnqueuers(test.TestCase):
     for _ in range(100):
       acc.append(int(next(gen_output)[0, 0, 0, 0]))
 
-    self.assertEqual(len(set(acc) - set(range(100))), 0)
+    self.assertEqual(acc, list(range(100)))
     enqueuer.stop()
 
   @unittest.skipIf(
@@ -177,7 +177,8 @@ class TestEnqueuers(test.TestCase):
     acc = []
     for _ in range(100):
       acc.append(int(next(gen_output)[0, 0, 0, 0]))
-    self.assertNotEqual(acc, list(range(100)))
+
+    self.assertEqual(acc, list(range(100)))
     enqueuer.stop()
 
   def test_generator_enqueuer_fail_threads(self):
